@@ -12,7 +12,6 @@ services:
       - PYTHONPATH=/app
     ports:
       - "8000:8000"
-    restart: no
 
   redis:
     container_name: redis
