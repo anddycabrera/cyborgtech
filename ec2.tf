@@ -62,7 +62,7 @@ resource "aws_instance" "app" {
 
   root_block_device {
     volume_type = "gp3"
-    volume_size = 8 # change this to the size you want in GB
+    volume_size = 16 # change this to the size you want in GB
   }
 
   tags = {
