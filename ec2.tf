@@ -15,7 +15,7 @@ resource "aws_instance" "app" {
               chmod +x /usr/local/bin/docker-compose
               systemctl start docker
               git clone https://github.com/anddycabrera/starlogs.git
-              cd starlogs
+              cd starlogs-main
               docker-compose up -d
               EOF
 }
