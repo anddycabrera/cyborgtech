@@ -53,7 +53,7 @@ resource "aws_security_group" "allow_traffic" {
 }
 
 resource "aws_instance" "app" {
-  ami           = "ami-01107263728f3bef4" # an Amazon Linux 2 AMI
+  ami           = "ami-024e6efaf93d85776" # an Ubuntu AMI
   instance_type = "t2.micro"
 
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
@@ -71,14 +71,17 @@ resource "aws_instance" "app" {
 
   user_data = <<-EOF
               #!/bin/bash
-              yum update -y
-              yum install -y docker
-              yum install -y git
+              apt update -y
+              apt install -y apt-transport-https ca-certificates curl software-properties-common git
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+              add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+              apt update -y
+              apt install -y docker-ce
               curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
               chmod +x /usr/local/bin/docker-compose
               systemctl start docker
               git clone https://github.com/anddycabrera/cyborgtech.git
-              cd cyborgtech-main
+              cd cyborgtech
               docker-compose up -d
               EOF
 }
