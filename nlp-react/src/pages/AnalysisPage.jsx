@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const SERVER_ADDRESS = 'http://localhost:8000'; // Change this to your production server address when necessary
+const SERVER_ADDRESS = 'https://mystarlog.com:8000'; // Change this to your production server address when necessary
 
 const AnalysisPage = () => {
   const [text, setText] = useState('');

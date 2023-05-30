@@ -69,6 +69,8 @@ resource "aws_instance" "app" {
     Name = "my-app"
   }
 
+  user_data_replace_on_change = true
+
   user_data = <<-EOF
               #!/bin/bash
               sudo apt update -y
