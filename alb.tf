@@ -95,13 +95,6 @@ resource "aws_security_group" "elb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  ingress {
-    from_port   = 8000
-    to_port     = 8000
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -121,36 +114,6 @@ resource "aws_lb_listener" "http_8000" {
       content_type = "text/plain"
       message_body = "The default response for port 8000"
       status_code  = "200"
-    }
-  }
-}
-
-resource "aws_lb_listener_rule" "api_v1_listener_rule" {
-  listener_arn = aws_lb_listener.http_8000.arn
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.api_v1_tg.arn
-  }
-
-  condition {
-    path_pattern {
-      values = ["/api/v1/*"]
-    }
-  }
-}
-
-resource "aws_lb_listener_rule" "docs_listener_rule" {
-  listener_arn = aws_lb_listener.http_8000.arn
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.docs_tg.arn
-  }
-
-  condition {
-    path_pattern {
-      values = ["/docs/*"]
     }
   }
 }
