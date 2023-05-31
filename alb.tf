@@ -27,11 +27,6 @@ resource "aws_lb" "lb" {
 
   enable_deletion_protection = true
 
-  access_logs {
-    bucket  = "my-access-logs-bucket"
-    prefix  = "lb"
-    enabled = true
-  }
 }
 
 resource "aws_lb_listener" "http" {
