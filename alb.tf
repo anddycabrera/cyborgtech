@@ -10,12 +10,20 @@ resource "aws_default_subnet" "default_az1" {
   }
 }
 
+resource "aws_default_subnet" "default_az2" {
+  availability_zone = "us-east-2b"
+
+  tags = {
+    Name = "Default subnet for us-west-2b"
+  }
+}
+
 resource "aws_lb" "lb" {
   name               = "tf-nlp-lb"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.elb_sg.id]
-  subnets            = [aws_default_subnet.default_az1.id]
+  subnets            = [aws_default_subnet.default_az1.id, aws_default_subnet.default_az2.id]
 
   enable_deletion_protection = true
 
