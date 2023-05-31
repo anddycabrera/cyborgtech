@@ -1,16 +1,17 @@
-resource "aws_acm_certificate" "cert" {
-  domain_name       = "mystarlog.com"
-  validation_method = "DNS"
+module "acm" {
+  source  = "terraform-aws-modules/acm/aws"
+  version = "~> 4.0"
 
-  subject_alternative_names = ["*.mystarlog.com"]
-}
+  domain_name  = "mystarlog.com"
+  zone_id      = data.aws_route53_zone.this.zone_id
 
-resource "aws_route53_record" "cert_validation" {
-  count = length(aws_acm_certificate.cert.domain_validation_options)
+  subject_alternative_names = [
+    "*.mystarlog.com",
+  ]
 
-  zone_id = data.aws_route53_zone.this.zone_id
-  name    = aws_acm_certificate.cert.domain_validation_options[count.index].resource_record_name
-  type    = aws_acm_certificate.cert.domain_validation_options[count.index].resource_record_type
-  records = [aws_acm_certificate.cert.domain_validation_options[count.index].resource_record_value]
-  ttl     = 60
+  wait_for_validation = false
+
+  tags = {
+    Name = "mystarlog.com"
+  }
 }
