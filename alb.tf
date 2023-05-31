@@ -77,6 +77,27 @@ resource "aws_lb_target_group_attachment" "tga" {
   port             = 8080
 }
 
+resource "aws_lb_target_group" "api_v1_tg" {
+  name     = "tf-example-api-v1-tg"
+  port     = 8000
+  protocol = "HTTP"
+  vpc_id   = data.aws_vpc.default.id
+
+  health_check {
+    interval            = 30
+    path                = "/api/v1/"
+    timeout             = 3
+    healthy_threshold   = 2
+    unhealthy_threshold = 2
+  }
+}
+
+resource "aws_lb_target_group_attachment" "api_v1_tga" {
+  target_group_arn = aws_lb_target_group.api_v1_tg.arn
+  target_id        = aws_instance.app.id
+  port             = 8000
+}
+
 resource "aws_security_group" "elb_sg" {
   name        = "elb_sg"
   description = "Allow inbound traffic on HTTP, HTTPS, and port 8000"
