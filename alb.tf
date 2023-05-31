@@ -6,7 +6,7 @@ resource "aws_default_subnet" "default_az1" {
   availability_zone = "us-east-2a"
 
   tags = {
-    Name = "Default subnet for us-west-2a"
+    Name = "Default subnet for us-east-2a"
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_default_subnet" "default_az2" {
   availability_zone = "us-east-2b"
 
   tags = {
-    Name = "Default subnet for us-west-2b"
+    Name = "Default subnet for us-east-2b"
   }
 }
 
