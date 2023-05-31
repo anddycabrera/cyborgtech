@@ -85,7 +85,7 @@ resource "aws_lb_target_group" "api_v1_tg" {
 
   health_check {
     interval            = 30
-    path                = "/api/v1/"
+    path                = "/health"
     timeout             = 3
     healthy_threshold   = 2
     unhealthy_threshold = 2
@@ -96,6 +96,21 @@ resource "aws_lb_target_group_attachment" "api_v1_tga" {
   target_group_arn = aws_lb_target_group.api_v1_tg.arn
   target_id        = aws_instance.app.id
   port             = 8000
+}
+
+resource "aws_lb_listener_rule" "api_v1" {
+  listener_arn = aws_lb_listener.https.arn
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.api_v1_tg.arn
+  }
+
+  condition {
+    path_pattern {
+      values = ["/api/v1/*","/docs*"]
+    }
+  }
 }
 
 resource "aws_security_group" "elb_sg" {
