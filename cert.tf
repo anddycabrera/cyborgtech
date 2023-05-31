@@ -1,12 +1,10 @@
 resource "aws_acm_certificate" "cert" {
-  domain_name       = "*.mystarlog.com"
+  domain_name       = "mystarlog.com"
   validation_method = "DNS"
 
-  subject_alternative_names = ["mystarlog.com"]
+  subject_alternative_names = ["*.mystarlog.com"]
 
-  lifecycle {
-    create_before_destroy = true
-  }
+
 }
 
 resource "aws_route53_record" "cert_validation" {
