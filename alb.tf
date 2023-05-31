@@ -102,18 +102,3 @@ resource "aws_security_group" "elb_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
-
-resource "aws_lb_listener" "http_8000" {
-  load_balancer_arn = aws_lb.lb.arn
-  port              = "8000"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "fixed-response"
-    fixed_response {
-      content_type = "text/plain"
-      message_body = "The default response for port 8000"
-      status_code  = "200"
-    }
-  }
-}
