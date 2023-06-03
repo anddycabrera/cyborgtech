@@ -12,7 +12,8 @@ resource "aws_instance" "app" {
   }
 
   tags = {
-    Name = "my-app"
+    Name = "mystarlog app"
+    Timestamp = "${timestamp()}"
   }
 
   user_data_replace_on_change = true
@@ -33,7 +34,7 @@ resource "aws_instance" "app" {
               sudo docker-compose up -d
               EOF
   lifecycle {
-    prevent_destroy = false
+    create_before_destroy = true
   }
 
 }
