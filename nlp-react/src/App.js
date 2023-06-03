@@ -11,14 +11,26 @@ import ContactForm from './pages/ContactForm';
 import WaitlistPage from './pages/WaitlistPage';
 import PrivacyPlicyPage from './pages/PrivacyPlicyPage';
 import TermsOfServicePage from './pages/TermsOfServicePage';
+import MainContent from './components/MainContent';
+import QuestionAnswer from './components/QuestionAnswer';
+import TranslationSummarization from './components/TranslationSummarization';
+import TextGeneration from './components/TextGeneration';
+import ConversationalAI from './components/ConversationalAI';
 
 function App() {
   return (
     <Router>
       <SvgIcons/>
       <Routes>
-      <Route path="/" element={<HomePage />} />
-        <Route path="/dashboard" element={<DashBoard />} />        
+        <Route path="/" element={<HomePage />} />
+        <Route path="dashboard" element={<DashBoard />}>
+          <Route index element={<MainContent />} />
+          <Route path="text-analysis" element={<MainContent />} />  
+          <Route path="question-answering" element={<QuestionAnswer />} />    
+          <Route path="translation-summarization" element={<TranslationSummarization />} />   
+          <Route path="text-generation" element={<TextGeneration />} />   
+          <Route path="conversational-ai" element={<ConversationalAI />} />          
+        </Route>        
         <Route path="/features" element={<Features />} />
         <Route path="/benefits" element={<BenefitsPage />} />
         <Route path="/pricing" element={<PricingPage />} />
