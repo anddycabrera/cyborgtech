@@ -20,7 +20,7 @@ resource "aws_instance" "app" {
 
   user_data = <<-EOF
               #!/bin/bash
-              # Unique String: ${random_string.r.result}
+              eco ${random_string.r.result}
               sudo apt update -y
               sudo apt install -y apt-transport-https ca-certificates curl software-properties-common git
               sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
