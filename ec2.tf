@@ -12,9 +12,9 @@ resource "aws_instance" "app" {
   }
 
   tags = {
-    Name = "mystarlog app"
-    Timestamp = "${timestamp()}"
+    Name = "MyStarlog-${timestamp()}"
   }
+
 
   user_data_replace_on_change = true
 
