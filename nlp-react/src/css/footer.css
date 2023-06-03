@@ -1,0 +1,4 @@
+.nav-link:hover {
+    color: #007BFF;  /* This is Bootstrap primary blue, change it as per your needs */
+    cursor: pointer;
+}

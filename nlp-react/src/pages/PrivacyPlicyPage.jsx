@@ -1,18 +1,18 @@
 import React from 'react';
 import Header from '../components/Heder';
 import FooterComponent from '../components/FooterComponent';
-import ContactUsSection from '../components/ContactUsSection';
+import PrivacyPolicy from '../components/PrivacyPolicy';
 
 
-function ContactForm() {
+function PrivacyPlicyPage() {
   return (
     <>
     <Header/>
-    <ContactUsSection/>
+    <PrivacyPolicy/>
     <div class="b-example-divider"></div>
     <FooterComponent/>
    </>
   );
 }
 
-export default ContactForm;
+export default PrivacyPlicyPage;

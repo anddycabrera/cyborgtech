@@ -1,18 +1,18 @@
 import React from 'react';
 import Header from '../components/Heder';
 import FooterComponent from '../components/FooterComponent';
-import ContactUsSection from '../components/ContactUsSection';
+import TermsOfService from '../components/TermsOfService';
 
 
-function ContactForm() {
+function TermsOfServicePage() {
   return (
     <>
     <Header/>
-    <ContactUsSection/>
+    <TermsOfService/>
     <div class="b-example-divider"></div>
     <FooterComponent/>
    </>
   );
 }
 
-export default ContactForm;
+export default TermsOfServicePage;

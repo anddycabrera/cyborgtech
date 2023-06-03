@@ -1,18 +1,21 @@
 import React from 'react';
 import Header from '../components/Heder';
 import FooterComponent from '../components/FooterComponent';
-import ContactUsSection from '../components/ContactUsSection';
+import PricingSection from '../components/prices';
 
 
-function ContactForm() {
+function PricingPage() {
   return (
     <>
     <Header/>
-    <ContactUsSection/>
+
+    <PricingSection/>
+
     <div class="b-example-divider"></div>
     <FooterComponent/>
    </>
   );
 }
 
-export default ContactForm;
+export default PricingPage;
+

@@ -1,18 +1,18 @@
 import React from 'react';
 import Header from '../components/Heder';
 import FooterComponent from '../components/FooterComponent';
-import ContactUsSection from '../components/ContactUsSection';
+import Waitlist from '../components/Waitlist';
 
 
-function ContactForm() {
+function WaitlistPage() {
   return (
     <>
     <Header/>
-    <ContactUsSection/>
+    <Waitlist/>
     <div class="b-example-divider"></div>
     <FooterComponent/>
    </>
   );
 }
 
-export default ContactForm;
+export default WaitlistPage;

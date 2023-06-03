@@ -1,8 +1,6 @@
 import React from 'react';
 import Header from '../components/Heder';
-import Hero from '../components/Hero';
 import FeaturesList from '../components/Feature';
-import PricingSection from '../components/prices';
 import FooterComponent from '../components/FooterComponent';
 
 const features = [
@@ -39,20 +37,16 @@ const features = [
 ];
 
 
-function HomePage() {
+function Features() {
   return (
     <>
-    <Header activeClass="text-secondary"/>
-    <Hero/>
-    <div class="b-example-divider"></div>
-    <FeaturesList features={features} />
-    <div class="b-example-divider"></div>
-    <PricingSection/>
+    <Header/>
+    <FeaturesList features={features} />   
     <div class="b-example-divider"></div>
     <FooterComponent/>
    </>
   );
 }
 
-export default HomePage;
+export default Features;
 
