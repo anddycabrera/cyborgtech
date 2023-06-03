@@ -32,6 +32,10 @@ resource "aws_instance" "app" {
               cd cyborgtech
               sudo docker-compose up -d
               EOF
+  lifecycle {
+    prevent_destroy = false
+  }
+
 }
 
 resource "aws_security_group" "allow_traffic" {

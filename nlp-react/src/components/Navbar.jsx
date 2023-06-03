@@ -13,8 +13,11 @@ function Navbar() {
           <a class="navbar-brand" href="/">
           <img class="bi me-2" src={logo} alt="MyStarlog" style={{ width: '40px', height: '40px' }}/>
           </a>        
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsDashboard" aria-controls="navbarsDashboard" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
-          <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+          <div class="collapse navbar-collapse" id="navbarsDashboard">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/dashboard">Natural Language Processing (SANDBOX) </a>
