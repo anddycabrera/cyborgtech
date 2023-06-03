@@ -12,14 +12,15 @@ resource "aws_instance" "app" {
   }
 
   tags = {
-    Name = "MyStarlog-${timestamp()}"
+    Name = "mystarlog"
+    Timestamp = "${timestamp()}"
   }
-
 
   user_data_replace_on_change = true
 
   user_data = <<-EOF
               #!/bin/bash
+              # Unique String: ${random_string.r.result}
               sudo apt update -y
               sudo apt install -y apt-transport-https ca-certificates curl software-properties-common git
               sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -37,6 +38,11 @@ resource "aws_instance" "app" {
     create_before_destroy = true
   }
 
+}
+
+resource "random_string" "r" {
+  length  = 8
+  special = false
 }
 
 resource "aws_security_group" "allow_traffic" {
