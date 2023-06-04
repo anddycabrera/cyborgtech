@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const BEARER_TOKEN = process.env.REACT_APP_BEARER_TOKEN;
+const TIMEOUT = 5000;
 
 const QuestionAnswerContext = ({ huggingFaceApi, title, description }) => {
   const [question, setQuestion] = useState('What is the method of administration of remdesivir?');
@@ -10,25 +11,40 @@ const QuestionAnswerContext = ({ huggingFaceApi, title, description }) => {
   const [score, setScore] = useState(null);
   const [error, setError] = useState(null);
   const [clearAll, setClearAll] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Automatically run query when the component is first loaded
     query();
   }, []);
 
   const query = async () => {
     if (question && context) {
+      setLoading(true);
       try {
+        const source = axios.CancelToken.source();
+        setTimeout(() => {
+          source.cancel('Operation timed out.');
+        }, TIMEOUT);
+
         const response = await axios.post(
-          huggingFaceApi, 
-          { "inputs": { "question": question, "context": context } }, 
-          { headers: { Authorization: `Bearer ${BEARER_TOKEN}` } }
+          huggingFaceApi,
+          { "inputs": { "question": question, "context": context } },
+          {
+            headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
+            cancelToken: source.token,
+          }
         );
         setAnswer(response.data.answer);
         setScore(response.data.score);
         setError(null);
       } catch (error) {
-        setError('Our Q&A service is currently busy. We apologize for the inconvenience. Please try again later.');
+        if (axios.isCancel(error)) {
+          setError('The operation timed out. Please try again.');
+        } else {
+          setError('Our Q&A service is currently busy. We apologize for the inconvenience. Please try again later.');
+        }
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -87,8 +103,8 @@ const QuestionAnswerContext = ({ huggingFaceApi, title, description }) => {
         </div>
 
         <div className="mb-3 text-end">
-          <button className="btn btn-primary" onClick={query} disabled={!question || !context}>
-            Analyze Question
+          <button className="btn btn-primary" onClick={query} disabled={!question || !context || loading}>
+            {loading ? 'Loading...' : 'Analyze Question'}
           </button>
         </div>
 

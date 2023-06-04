@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const BEARER_TOKEN = process.env.REACT_APP_BEARER_TOKEN;
+const TIMEOUT = 5000; 
 
 const Summarization = ({ huggingFaceApi, title, description }) => {
   const [text, setText] = useState(`In today's highly competitive business landscape, sales teams face numerous challenges in effectively managing information overload, extracting key insights, and making informed decisions. That's where a summarization model comes in. This advanced tool utilizes cutting-edge natural language processing techniques to analyze and summarize large volumes of text, saving sales professionals valuable time and resources.
@@ -19,6 +20,7 @@ const Summarization = ({ huggingFaceApi, title, description }) => {
   const [summaryResult, setSummaryResult] = useState(null);
   const [error, setError] = useState(null);
   const [clearAll, setClearAll] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     submitTextForAnalysis();
@@ -26,14 +28,31 @@ const Summarization = ({ huggingFaceApi, title, description }) => {
 
   const submitTextForAnalysis = async () => {
     if (text) {
+      setLoading(true);
       try {
-        const response = await axios.post(huggingFaceApi, { inputs: text }, {
-          headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
-        });
+        const source = axios.CancelToken.source();
+        setTimeout(() => {
+          source.cancel('Operation timed out.');
+        }, TIMEOUT);
+
+        const response = await axios.post(
+          huggingFaceApi,
+          { inputs: text },
+          {
+            headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
+            cancelToken: source.token,
+          }
+        );
         setSummaryResult(response.data);
         setError(null);
       } catch (error) {
-        setError('Our text summarization service is currently busy. We apologize for the inconvenience. Please try again later.');
+        if (axios.isCancel(error)) {
+          setError('The operation timed out. Please try again.');
+        } else {
+          setError('Our text summarization service is currently busy. We apologize for the inconvenience. Please try again later.');
+        }
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -79,8 +98,8 @@ const Summarization = ({ huggingFaceApi, title, description }) => {
         </div>
 
         <div className="mb-3 text-end">
-          <button className="btn btn-primary" onClick={submitTextForAnalysis} disabled={!text}>
-            Summarize Text
+          <button className="btn btn-primary" onClick={submitTextForAnalysis} disabled={!text || loading}>
+            {loading ? 'Loading...' : 'Summarize Text'}
           </button>
         </div>
 

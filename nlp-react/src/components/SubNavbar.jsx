@@ -40,7 +40,7 @@ const SubNavbar = () => {
           className="nav-link" 
           style={location.pathname === "/dashboard/text-generation" ? {...navStyle, ...activeStyle} : navStyle}
           to="/dashboard/text-generation">
-          Text Generation <span className="badge bg-light text-dark rounded-pill align-text-bottom">Coming soon</span>
+          Text Generation <span className="badge bg-light text-dark rounded-pill align-text-bottom">1</span>
         </NavLink>
         <NavLink 
           className="nav-link" 
