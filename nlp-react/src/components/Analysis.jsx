@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const BEARER_TOKEN = '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';
+const BEARER_TOKEN = process.env.REACT_APP_BEARER_TOKEN;
 
 const AnalysisPage = ({ huggingFaceApi, title, description }) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState('I love the MyStarlog models. It provides very insightful results.');
   const [taskResult, setTaskResult] = useState(null);
   const [error, setError] = useState(null);
-  const [clearAll, setClearAll] = useState(false); // New state variable
+  const [clearAll, setClearAll] = useState(false);
+
+  useEffect(() => {
+    // Automatically run analysis when the component is first loaded
+    submitTextForAnalysis();
+  }, []);
 
   const submitTextForAnalysis = async () => {
     if (text) {
       try {
+        console.log(process.env.REACT_APP_BEARER_TOKEN);
         const response = await axios.post(huggingFaceApi, { inputs: text }, {
           headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
         });

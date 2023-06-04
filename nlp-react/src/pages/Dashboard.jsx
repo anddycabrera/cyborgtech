@@ -8,7 +8,6 @@ const DashBoard = () => (
     <Navbar/>
     <Outlet />
 
-    <Footer/>
   </div>
 );
 

@@ -8,7 +8,7 @@ const features = [
     },
     { 
       icon: 'Question-Answering', 
-      title: 'Table Question Answering', 
+      title: 'Question Answering', 
       text: 'Extract precise information from tabular data in response to specific queries.', 
       cta: 'Sandbox: Explore Table Question Answering',
       link: '/dashboard/question-answering'
