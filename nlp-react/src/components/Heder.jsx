@@ -40,9 +40,9 @@ function Header() {
             <button 
               type="button" 
               className="btn btn-warning" 
-              onClick={() => navigate('/waitlist')}
+              onClick={() => navigate('/dashboard')}
             >
-              Subscribe
+              NLP Sandbox
             </button>
           </div>
         </div>
