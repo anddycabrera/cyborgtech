@@ -8,8 +8,8 @@ const PricingSection = () => {
             
             <header>
                 <div className="pricing-header p-3 pb-md-4 mx-auto text-center">
-                    <h1 className="display-4 fw-normal">Simple, Transparent Pricing for Every Business Size</h1>
-                    <p className="fs-5 text-muted">Get started with our powerful NLP solutions today. We offer flexible pricing plans designed to meet the needs of businesses of all sizes. Choose the plan that's right for you and begin harnessing the power of language data. Please note: Our services are currently in development and will be launching soon. Join our waitlist to be the first to access our tools when they become available.</p>
+                    <h1 className="display-4 fw-normal">Simple, Transparent Pricing - Tailored for Every Business Size</h1>
+                    <p className="fs-5 text-muted">Embark on your NLP journey with us today. Our flexible pricing plans, designed to cater to businesses of all sizes, put powerful NLP solutions within your reach. Select the plan that aligns with your goals and get ready to unlock the untapped potential of language data. Although our services are currently under development, we're gearing up for launch. Join our waitlist to secure your priority access to our innovative tools the moment they're available. Don't miss the chance to be at the forefront of NLP technology.</p>
                 </div>
             </header>
 

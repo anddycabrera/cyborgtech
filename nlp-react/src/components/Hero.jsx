@@ -8,9 +8,9 @@ function Hero() {
     <main>
         <div className="bg-dark text-secondary px-4 py-5 text-center">
             <div className="py-5">
-                <h1 className="display-5 fw-bold text-white">Harness the Power of Language</h1>
+                <h1 className="display-5 fw-bold text-white">Harness the Power of Language - Be First in Line</h1>
                 <div className="col-lg-6 mx-auto">
-                    <p className="fs-5 mb-4">Unlock the potential of your data with our cutting-edge Natural Language Processing technology. Gain deep insights, make informed decisions, and transform your business.</p>
+                    <p className="fs-5 mb-4">Discover the power of your data with our state-of-the-art Natural Language Processing technology. Gain unparalleled insights, make data-driven decisions, and revolutionize your business. Be one of the first to experience this transformation by joining our exclusive waitlist. Don't miss out – secure your spot today.</p>
                     <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
                         <button 
                           type="button" 

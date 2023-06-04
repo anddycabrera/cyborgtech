@@ -104,8 +104,8 @@ const Waitlist = () => {
     `;
   return (
     <div className="container">
-      <h1 className="my-4">Join Our Waitlist</h1>
-      <p className="lead">Enter your email to join our waitlist. We'll notify you as soon as we're ready to welcome you!</p>
+      <h1 className="my-4">Secure Your Spot - Join Our Exclusive Waitlist</h1>
+      <p className="lead">Be among the first to experience the power of our cutting-edge Natural Language Processing technology. Enter your email to join our exclusive waitlist and we'll notify you as soon as our tools are ready for launch. Don't miss out on this opportunity to revolutionize your data analysis capabilities!</p>
       <div dangerouslySetInnerHTML={{ __html: iframeHtml }} />
     </div>
   );
