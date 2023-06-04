@@ -34,7 +34,7 @@ const SubNavbar = () => {
           className="nav-link" 
           style={location.pathname === "/dashboard/translation-summarization" ? {...navStyle, ...activeStyle} : navStyle}
           to="/dashboard/translation-summarization">
-          Translation and Summarization <span className="badge bg-light text-dark rounded-pill align-text-bottom">Coming soon</span>
+          Translation and Summarization <span className="badge bg-light text-dark rounded-pill align-text-bottom">1</span>
         </NavLink>
         <NavLink 
           className="nav-link" 

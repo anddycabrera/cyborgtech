@@ -100,13 +100,17 @@ const AnalysisPage = ({ huggingFaceApi, title, description }) => {
               </text>
             </svg>
 
-            <p className="pb-3 mb-0 small lh-sm border-bottom">
-              <strong className="d-block text-gray-dark">@results</strong>
-              <p>
-                Result: <span style={labelStyle}>{highestScoreResult.label}</span> with score of{' '}
-                {(highestScoreResult.score * 100).toFixed(1)}%
-              </p>
-            </p>
+             <div className="pb-3 mb-0 lh-sm border-bottom">
+              <div className="alert alert-warning">
+                <p className="pb-3 mb-0 lh-sm border-bottom">
+                  <strong className="d-block text-gray-dark">@results</strong>
+                  <p>
+                    Result: <span style={labelStyle}>{highestScoreResult.label}</span> with score of{' '}
+                    {(highestScoreResult.score * 100).toFixed(1)}%
+                  </p>
+                </p>
+             </div>
+            </div>
           </div>
         )}
 

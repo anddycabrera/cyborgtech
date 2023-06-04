@@ -111,7 +111,7 @@ const QuestionAnswerContext = ({ huggingFaceApi, title, description }) => {
               </text>
             </svg>
 
-            <div className="pb-3 mb-0 small lh-sm border-bottom">
+            <div className="pb-3 mb-0 lh-sm border-bottom">
               <div className="alert alert-warning">
                 <strong className="d-block text-gray-dark">@results</strong>
                 <p className="text-success">
