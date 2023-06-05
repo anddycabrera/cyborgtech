@@ -46,7 +46,7 @@ const SubNavbar = () => {
           className="nav-link" 
           style={location.pathname === "/dashboard/conversational-ai" ? {...navStyle, ...activeStyle} : navStyle}
           to="/dashboard/conversational-ai">
-          Conversational AI <span className="badge bg-light text-dark rounded-pill align-text-bottom">Coming soon</span>
+          Conversational AI <span className="badge bg-light text-dark rounded-pill align-text-bottom">1</span>
         </NavLink>
       </nav>
     </div>

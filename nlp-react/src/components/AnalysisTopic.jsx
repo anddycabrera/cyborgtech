@@ -22,7 +22,7 @@ const AnalysisPage = ({ huggingFaceApi, title, description }) => {
         setTaskResult(predictions);
         setError(null);
       } catch (error) {
-        setError('Our sentiment analysis service is currently busy. We apologize for the inconvenience. Please try again later.');
+        setError('Our NLP Model service is currently busy. We apologize for the inconvenience. Please try again later.');
       }
     }
   };

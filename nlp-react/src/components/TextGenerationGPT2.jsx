@@ -65,7 +65,7 @@ const TextGenerationGPT2 = ({ huggingFaceApi, title, description }) => {
         if (axios.isCancel(error)) {
           setError('The operation timed out. Please try again.');
         } else {
-          setError('Our sentiment analysis service is currently busy. We apologize for the inconvenience. Please try again later.');
+          setError('Our NLP Model service is currently busy. We apologize for the inconvenience. Please try again later.');
         }
       } finally {
         setLoading(false);
