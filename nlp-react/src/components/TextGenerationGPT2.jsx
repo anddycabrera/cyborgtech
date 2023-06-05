@@ -2,27 +2,27 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const BEARER_TOKEN = process.env.REACT_APP_BEARER_TOKEN;
-const TIMEOUT = 5000;
+const TIMEOUT = 20000;
 
 const TextGenerationGPT2 = ({ huggingFaceApi, title, description }) => {
-  const [text, setText] = useState('My name is Mike and I am');
+  const [inputText, setInputText] = useState('My name is Mike and I am');
+  const [submittedText, setSubmittedText] = useState(inputText);
   const [taskResult, setTaskResult] = useState(null);
   const [displayedResult, setDisplayedResult] = useState('');
   const [error, setError] = useState(null);
-  const [clearAll, setClearAll] = useState(false);
   const [loading, setLoading] = useState(false);
   const typingSimulationRef = useRef(null);
 
   useEffect(() => {
-    submitTextForAnalysis();
-  }, []);
+    submitTextForAnalysis(submittedText);
+  }, [submittedText]);
 
   useEffect(() => {
     let typingIndex = 0;
     if (typingSimulationRef.current) {
       clearInterval(typingSimulationRef.current);
     }
-  
+
     if (taskResult && taskResult.length > 0) {
       let trimmedResult = taskResult.trimStart(); // Remove leading spaces
       setDisplayedResult(' ' + trimmedResult[0]); // start with the first character of taskResult
@@ -38,11 +38,11 @@ const TextGenerationGPT2 = ({ huggingFaceApi, title, description }) => {
       setDisplayedResult('');
     }
   }, [taskResult]);
- 
-  
-  const submitTextForAnalysis = async () => {
-    if (text) {
+
+  const submitTextForAnalysis = async (textToSubmit) => {
+    if (textToSubmit) {
       setLoading(true);
+      setDisplayedResult('');
       try {
         const source = axios.CancelToken.source();
         setTimeout(() => {
@@ -51,14 +51,14 @@ const TextGenerationGPT2 = ({ huggingFaceApi, title, description }) => {
 
         const response = await axios.post(
           huggingFaceApi,
-          { inputs: text.trim() },
+          { inputs: textToSubmit.trim() },
           {
             headers: { Authorization: `Bearer ${BEARER_TOKEN}` },
             cancelToken: source.token,
           }
         );
         const generatedText = response.data[0].generated_text;
-        const promptLength = text.trim().length + 1;
+        const promptLength = textToSubmit.trim().length + 1;
         setTaskResult(generatedText.slice(promptLength));
         setError(null);
       } catch (error) {
@@ -73,18 +73,18 @@ const TextGenerationGPT2 = ({ huggingFaceApi, title, description }) => {
     }
   };
 
-  const handleClearAll = () => {
-    setText('');
-    setTaskResult(null);
-    setError(null);
-    setClearAll(true);
+  const handleGenerateTextClick = () => {
+    setSubmittedText(inputText);
   };
 
-  if (clearAll) {
-    setText('');
+  const handleClearAll = () => {
+    setInputText('');
     setTaskResult(null);
     setError(null);
-    setClearAll(false);
+  };
+
+  const handleInputChange = (event) => {
+    setInputText(event.target.value);
   }
 
   return (
@@ -102,16 +102,16 @@ const TextGenerationGPT2 = ({ huggingFaceApi, title, description }) => {
 
         <div className="mb-3">
           <textarea 
+            onChange={handleInputChange}
             className="form-control" 
-            value={text} 
-            onChange={(e) => setText(e.target.value)}
+            value={inputText} 
             style={{ width: '100%' }} 
             rows="5" 
           />
         </div>
 
         <div className="mb-3 text-end">
-          <button className="btn btn-primary" onClick={submitTextForAnalysis} disabled={!text || loading}>
+          <button className="btn btn-primary" onClick={handleGenerateTextClick} disabled={!inputText || loading}>
             {loading ? 'Loading...' : 'Generate Text'}
           </button>
         </div>
@@ -123,17 +123,16 @@ const TextGenerationGPT2 = ({ huggingFaceApi, title, description }) => {
               className="form-control" 
               style={{ width: '100%', minHeight: '100px', whiteSpace: 'pre-wrap' }}
             >
-              <span style={{color: 'black'}}>{text}</span>
+              <span style={{color: 'black'}}>{submittedText}</span>
               <span style={{color: 'blue'}}>{displayedResult}</span>
             </div>
           </div>
         )}
 
-
         <small className="d-block text-end mt-3">
           <a href="#" onClick={handleClearAll}>Clear all</a>
         </small>
-        </div>
+      </div>
     </>
   );
 };
