@@ -1,5 +1,5 @@
 resource "aws_instance" "app" {
-  ami           = "ami-053b0d53c279acc90" # an Ubuntu AMI
+  ami           = "ami-024e6efaf93d85776" # an Ubuntu AMI
   instance_type = "p3.2xlarge"
 
   vpc_security_group_ids = [aws_security_group.allow_traffic.id]
